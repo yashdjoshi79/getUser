@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="keywords" content="JavaScript, WebRTC" />
+<meta name="description" content="WebRTC codelab" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+<title>WebRTC codelab: step 1</title>
+
+<!-- When we finish the codelab we'll move CSS and JavaScript to separate files -->
+
+<!-- CSS will go here -->
+<style>
+</style>
+
+
+</head>
+<video autoplay></video>
+<body>
+
+<!-- HTML will go here -->
+<script>
+// Define the error callback.
+ function errorCallback(error) {
+   console.log("Fail to setProperty" + error.message);
+ }
+ var hdConstraints = {
+  video: {
+    mandatory: {
+      minWidth: 1280,
+      minHeight: 720
+    }
+  }
+};
+ navigator.getUserMedia  = navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+						  
+var video = document.querySelector('video');
+
+if (navigator.getUserMedia) {
+  navigator.getUserMedia(
+  hdConstraints, 
+  function(stream) {
+    video.src = window.URL.createObjectURL(stream);
+  }, errorCallback);
+} else {
+  video.src = 'somevideo.webm'; // fallback.
+}
+</script>
+
+</body>
+
+</html>
